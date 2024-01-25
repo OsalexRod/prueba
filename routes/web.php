@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Models\Usuario;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +17,26 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/login', function () {
+    return 'Hello World 69';
+});
+
+Route::get('/usuarios', function () {
+    return Usuario::all();
+    //return response()->json(Usuario::all());
+});
+
+Route::get('/usuarios/{id}', function (string $id) {
+    return Usuario::findOrFail(intval($id));
+});
+
+Route::get('/usuarios/{nombre}/{correo}/{ci}', function (string $nombre, string $correo, string $ci) {
+    $usuarios = new Usuario;
+    $usuarios->nombre = $nombre;
+    $usuarios->correo = $correo;
+    $usuarios->ci = intval($ci);
+    $usuarios->save();
+    return "Correcto!!!";
 });
