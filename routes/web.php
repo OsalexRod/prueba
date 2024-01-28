@@ -24,8 +24,8 @@ Route::get('/login', function () {
 });
 
 Route::get('/usuarios', function () {
-    return Usuario::all();
-    //return response()->json(Usuario::all());
+    $usuarios = Usuario::all();
+    return view('usuario', ['vector_usuarios' => $usuarios]);
 });
 
 Route::get('/usuarios/{id}', function (string $id) {
@@ -39,4 +39,8 @@ Route::get('/usuarios/{nombre}/{correo}/{ci}', function (string $nombre, string 
     $usuarios->ci = intval($ci);
     $usuarios->save();
     return "Correcto!!!";
+});
+
+Route::get('/vista/usuarios', function(){
+    return view('usuario');
 });
