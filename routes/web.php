@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use App\Models\Usuario;
 
 /*
@@ -25,21 +27,27 @@ Route::get('/login', function () {
 
 Route::get('/usuarios', function () {
     $usuarios = Usuario::all();
-    return view('usuario', ['vector_usuarios' => $usuarios]);
+    return view('usuario.index', ['vector_usuarios' => $usuarios]);
+})->name("usuarios.index");
+
+Route::get('/usuarios/create', function () {
+    return view('usuario.create');
+});
+
+Route::post('/usuarios', function (Request $request) {
+    $usuarios = new Usuario;
+    $usuarios->nombre = $request->input('nombre');
+    $usuarios->correo = $request->input('correo');
+    $usuarios->ci = $request->input('ci');//intval($ci);
+    $usuarios->save();
+    return redirect()->route('usuarios.index');
 });
 
 Route::get('/usuarios/{id}', function (string $id) {
     return Usuario::findOrFail(intval($id));
 });
 
-Route::get('/usuarios/{nombre}/{correo}/{ci}', function (string $nombre, string $correo, string $ci) {
-    $usuarios = new Usuario;
-    $usuarios->nombre = $nombre;
-    $usuarios->correo = $correo;
-    $usuarios->ci = intval($ci);
-    $usuarios->save();
-    return "Correcto!!!";
-});
+
 
 Route::get('/vista/usuarios', function(){
     return view('usuario');

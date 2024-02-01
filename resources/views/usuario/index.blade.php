@@ -7,8 +7,8 @@
 </head>
 <body>
     Vista Usuarios
-    <button>Crear</button>
-        <table>
+    <button onclick="location.href='/usuarios/create'">Crear</button>
+        <table border="1px" color="black">
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
