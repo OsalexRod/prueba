@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}" />
 </head>
 <body>
-    Vista Usuarios
+    <h3>Vista Usuarios</h3>
     <button onclick="location.href='/usuarios/create'">Crear</button>
-        <table border="1px" color="black">
+        <table>
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
