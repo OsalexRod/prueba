@@ -21,10 +21,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', function () {
-    return 'Hello World 69';
-});
-
 Route::get('/usuarios', function () {
     $usuarios = Usuario::all();
     return view('usuario.index', ['vector_usuarios' => $usuarios]);
@@ -43,12 +39,16 @@ Route::post('/usuarios', function (Request $request) {
     return redirect()->route('usuarios.index');
 });
 
-Route::get('/usuarios/{id}', function (string $id) {
-    return Usuario::findOrFail(intval($id));
+Route::get('/usuarios/{id}/edit', function (string $id) {
+    $usuarioActual = Usuario::findOrFail(intval($id));
+    return view('usuario.edit', ['usuarioActual' => $usuarioActual]);
 });
 
-
-
-Route::get('/vista/usuarios', function(){
-    return view('usuario');
+Route::put('/usuarios/{id}', function (Request $request ,string $id) {
+    $usuarioActual = Usuario::findOrFail(intval($id));
+    $usuarioActual->nombre = $request->input('nombre');
+    $usuarioActual->correo = $request->input('correo');
+    $usuarioActual->ci = $request->input('ci');
+    $usuarioActual->save();
+    return redirect()->route('usuarios.index');
 });

@@ -24,7 +24,7 @@
                 <td>{{ $usuario->correo }}</td>
                 <td>{{ $usuario->ci }}</td>
                 <td>
-                    <button>Actualizar</button>
+                    <button onclick="location.href='/usuarios/{{ $usuario->id }}/edit'">Actualizar</button>
                     <button>Eliminar</button>
                 </td>
             </tr>
