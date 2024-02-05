@@ -52,3 +52,9 @@ Route::put('/usuarios/{id}', function (Request $request ,string $id) {
     $usuarioActual->save();
     return redirect()->route('usuarios.index');
 });
+
+Route::delete('/usuarios/{id}', function (string $id) {
+    $usuarioActual = Usuario::findOrFail(intval($id));
+    $usuarioActual->delete();
+    return redirect()->route('usuarios.index');
+});

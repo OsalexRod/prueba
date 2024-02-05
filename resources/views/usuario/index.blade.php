@@ -25,7 +25,11 @@
                 <td>{{ $usuario->ci }}</td>
                 <td>
                     <button onclick="location.href='/usuarios/{{ $usuario->id }}/edit'">Actualizar</button>
-                    <button>Eliminar</button>
+                    <form action="/usuarios/{{ $usuario->id }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Eliminar</button>
+                    </form>
                 </td>
             </tr>
             @endforeach    
