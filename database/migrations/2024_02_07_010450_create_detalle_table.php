@@ -15,6 +15,8 @@ return new class extends Migration
             $table->unsignedBigInteger('factura_id');
             $table->unsignedBigInteger('producto_id');
             $table->timestamps();
+
+            $table->primary(['factura_id', 'producto_id']); //me olvide esta linea xD (es una llave compuesta)
             
             $table->foreign('factura_id')
                 ->references('id')
